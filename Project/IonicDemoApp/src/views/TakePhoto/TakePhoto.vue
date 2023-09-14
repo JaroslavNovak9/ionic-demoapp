@@ -1,5 +1,6 @@
 <template>
     <div class="take-photo-container">
+        {{ platofrm }}
         <div 
             v-if="isImageSourceEmpty == false"
             class="taken-photo-container"
@@ -18,7 +19,7 @@
 // Importing some Vue specific code
 import { reactive, computed, onMounted } from 'vue';
 // Importing Ionic components
-import { IonButton, IonImg, isPlatform } from '@ionic/vue';
+import { IonButton, IonImg, isPlatform, getPlatforms } from '@ionic/vue';
 // Importing capacitor native plugins
 import { Camera, CameraResultType, CameraSource, Photo } from "@capacitor/camera";
 import { Filesystem, Directory } from '@capacitor/filesystem';
@@ -36,6 +37,9 @@ var imageData = reactive({
 })
 const isImageSourceEmpty = computed(() => {
     return imageData.source == null || imageData.source == ""
+})
+const platofrm = computed(() => {
+    return getPlatforms()
 })
 
 // Lifecycle methods
